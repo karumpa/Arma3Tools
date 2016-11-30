@@ -21,8 +21,8 @@ function calcArty(){
     var rads = getRads(x1,y1,x2,y2);
     var degs = radsToDegs(rads);
     var mrads = rads*1000;
-    var dist = getDist(x1,y1,x2,y2);
-    dist = dist.toFixed(0);
+    var distance = getDist(x1,y1,x2,y2);
+    distance = distance.toFixed(0);
     mrads = mrads.toFixed(0);
     degs = degs.toFixed(0);
     disp.innerHTML = x1 + ", " + y1 +
