@@ -31,7 +31,7 @@ function calcArty(){
     degs = degs.toFixed(0);
     disp.innerHTML = x1 + ", " + y1 +
     "<br />" + x2 + ", " + y2 +
-    "<br />Distance: " + dist +"m" +
+    "<br />Distance: " + distance +"m" +
     "<br />MRADS:" + mrads + ", (" + degs+"&deg;)";
   }
 
