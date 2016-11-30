@@ -22,8 +22,8 @@ function calcArty(){
     var degs = radsToDegs(rads);
     var mrads = rads*1000;
     var distance = getDist(x1,y1,x2,y2);
-    distance = distance.toFixed(0);
     mrads = mrads.toFixed(0);
+    distance = distance.toFixed(0);
     degs = degs.toFixed(0);
     disp.innerHTML = x1 + ", " + y1 +
     "<br />" + x2 + ", " + y2 +
@@ -129,7 +129,7 @@ function radsToDegs(rads){
 }
 function getDist (x1,y1,x2,y2){
   var num = Math.sqrt(Math.pow(x1-x2,2)+Math.pow(y1-y2,2))*10;
-  return num.toFixed(2);
+  return num.toFixed(0);
 }
 function validPos (pos){
 return pos.length ==8;
