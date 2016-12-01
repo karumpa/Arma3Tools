@@ -7,21 +7,20 @@ function calcArty(){
   disp.innerHTML = "";
   var uPos = document.getElementById('upos').value; //Position 1, assumed this is your position
   var tgtPos = document.getElementById('tgtpos').value; //Poisition 2, assumed target
+  var x1,x2,y1,y2;
   if (uPos.length ==6) {
     uPos = insZero(uPos); //Turning 6 digit grids into 8 digit grids
   }
   if (tgtPos.length == 6) {
     tgtPos = insZero(tgtPos); //Again, for P2
   }
+  //parse strings and obtain x and y component
+  x1 = getPosComp(uPos,"x");
+  x2 = getPosComp(tgtPos,"x");
+  y1 = getPosComp(uPos,"y");
+  y2 = getPosComp(tgtPos,"y");
 
-  if (true) { //fix this later, as in check if its a valid entry
-    var x1,x2,y1,y2;
-    //parse strings and obtain x and y component
-    x1 = getPosComp(uPos,"x");
-    x2 = getPosComp(tgtPos,"x");
-    y1 = getPosComp(uPos,"y");
-    y2 = getPosComp(tgtPos,"y");
-
+  if (verifyInput(x1, x2, y1, y2)) { //fix this later, as in check if its a valid entry
     var rads = getRads(x1,y1,x2,y2);
     var degs = radsToDegs(rads);
     var mrads = rads*1000;
@@ -33,8 +32,23 @@ function calcArty(){
     "<br />" + x2 + ", " + y2 +
     "<br />Distance: " + distance +"m" +
     "<br />MRADS:" + mrads + ", (" + degs+"&deg;)";
+  } else {
+	console.log("value error");
   }
+}
 
+function verifyInput(x1, x2, y1, y2) {
+	if (typeof x1 != "string" || typeof x2 != "string" || typeof y1 != "string" || typeof y2 != "string") {
+		return false;
+	}
+	// Regular expression that matches a string which is comprised solely of digits
+	let regex = new RegExp("^[0-9]+$");
+	// Returns true if x1 and x2 both match the regex, false otherwise
+	x = regex.test(x1) && regex.test(x2);
+	// Returns true if y1 and y2 both match the regex, false otherwise
+	y = regex.test(y1) && regex.test(y2);
+	// Returns true if x and y are true, false otherwise
+	return y && x;
 }
 function getScenario (x,y){
   //returns a scenario number based on where the 2 points are
