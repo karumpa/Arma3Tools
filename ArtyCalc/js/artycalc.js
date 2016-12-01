@@ -41,9 +41,13 @@ function verifyInput(x1, x2, y1, y2) {
 	if (typeof x1 != "string" || typeof x2 != "string" || typeof y1 != "string" || typeof y2 != "string") {
 		return false;
 	}
+	// Regular expression that matches a string which is comprised solely of digits
 	let regex = new RegExp("^[0-9]+$");
+	// Returns true if x1 and x2 both match the regex, false otherwise
 	x = regex.test(x1) && regex.test(x2);
+	// Returns true if y1 and y2 both match the regex, false otherwise
 	y = regex.test(y1) && regex.test(y2);
+	// Returns true if x and y are true, false otherwise
 	return y && x;
 }
 function getScenario (x,y){
