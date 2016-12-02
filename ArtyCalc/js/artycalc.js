@@ -19,35 +19,27 @@ function calcArty(){
     adj(uPos,tgtPos);
 }
 function adj(p1,p2){
-  var arr = [1, 5, 10, 20];
-  var val;
-  var sol;
-  var el;
-  var letter, id;
-  var x0, y0;
-  var newX, newY;
-  var p3;
-  for (var i = 0; i < 8; i++) {
-    var x, y;
-    x = getPosComp(p2,"x");
-    y = getPosComp(p2,"y");
-
-    if (x.substring(0,1)=="0") {
-      x0=true;
-    }
-    else{
-      x0=false;
-    }
-    if (y.substring(0,1)=="0") {
-      y0=true;
-    }
-    else{
-      y0=false;
-    }
-    x = parseInt(x,10);
+  //builds the Adjustment table
+  //p1 does not move, but is compared with a shift in 8 directions X 4 distances
+  var arr = [5, 10, 20, 30]; //The distances to adjust, in grid units (1 = 10m)
+  var val; //the value printed in the cell
+  var sol; //the solution obtained
+  var el; //the targeted element
+  var letter, id; //combine together to target the element
+  var x0, y0; //boolean, if x or y start with 0;
+  var newX, newY; //adjusted x,y components in grid units
+  var p3; //the new point
+  var x, y;
+  x = getPosComp(p2,"x");
+  y = getPosComp(p2,"y");
+  for (var a = 0; a < arr.length; a++) {
+    document.getElementById("th"+a).innerHTML = arr[a] * 10 + "m";
+  }
+  for (var i = 0; i < 8; i++) { //loop through the 8 directions
+    x = parseInt(x,10); //convert the coords into integers
     y = parseInt(y,10);
-    for (var j = 0; j < arr.length; j++) {
-      switch (i) {
+    for (var j = 0; j < arr.length; j++) { //loop through the array of distances
+      switch (i) { //There is a better way to do this. Load an array with the letters, figure out the deltas programmatically
         case 0:
           //N
           letter="N";
@@ -97,16 +89,21 @@ function adj(p1,p2){
           newY=y+Math.sqrt(arr[j]);
           break;
       }
+      //Round the values to no decimals
       newX = newX.toFixed(0);
       newY = newY.toFixed(0);
+      //convert to strings
+      newX = newX.toString();
+      newY = newY.toString();
+      //Add a 0 in front if the grid ref <1000
       if (newX.length == 3){
         newX=0+newX;
       }
       if (newY.length == 3){
         newY=0+newY;
       }
-      p3 = newX.toString() +newY.toString();
-      id = letter + arr[j] + 0;
+      p3 =  newX+newY;
+      id = letter + j;
       sol = fullCalc(p1, p3);
       val = sol.distance +"m | " + sol.mrad +" | " +sol.deg+"&deg;";
       document.getElementById(id).innerHTML = val;
